@@ -19,35 +19,21 @@ export default function Canvas () {
   const globalDna = useSelector((state) => state.dna.currentDna);
 
 
-
-  const [currentHistory, setCurrentHistory] = useState([]);
-  const [tempArray, setTempArray] = useState([]);
-
-
-
-
   function SaveCurrentCanvas(){
-
     let count = document.getElementById('previewSection').childNodes.length+1
     console.log(count)
-
     let element = document.getElementById('photo');
     html2canvas(element).then(
         (canvas) => {
           const dataURL = canvas.toDataURL('image/png');
-
           //initilaise button image and container
           let container = document.createElement('div');
           let anchor =document.createElement('img');
           let button = document.createElement('button');
-
           // add attributes
-
           //image
           anchor.src= dataURL;    anchor.setAttribute('class','previewImages')
           anchor.setAttribute('id','previewImage'+count)
-       
-
           //button 
           button.setAttribute('id',count)
           button.innerHTML = "Download!"
@@ -59,15 +45,14 @@ export default function Canvas () {
             downloadjs(currentImage.src, 'download.png', 'image/png');
           
           })
-
           //container
           container.setAttribute('id','previewContainer')
           container.appendChild(button)
           container.appendChild(anchor)
 
+          //add to LIST
           document.getElementById('previewSection').prepend(container);
       })  
-
   }
   
   return (
